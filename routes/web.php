@@ -1,7 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AssetsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('pages.assets.index');
-});
+Route::get('/Assets', [AssetsController::class, 'index']);
