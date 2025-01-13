@@ -14,13 +14,36 @@ class AssetSeeder extends Seeder
     public function run(): void
     {
         Asset::create([
-            "Nama Barang" => "Innova",
-            "Penanggung Jawab" => "Rifqi Abdillah",
-            "Tahun Pembelian" => 2008,
-            "Nomor Polisi" => "L 2008 AB",
-            "Deskripsi" => "barang bagus",
-            "category_id" => 1,
+            'nama_barang' => 'Innova',
+            'status' => 'available',
+            'tahun_pembelian' => 2008,
+            'nomor_polisi' => 'L 2008 AB',
+            'deskripsi' => 'Kondisi barang bagus',
+            'harga_beli' => 300000000,
+            'merk' => 'Toyota',
+            'category_id' => 1,
+        ]);
 
+        Asset::create([
+            'nama_barang' => 'Innova',
+            'status' => 'missing',
+            'tahun_pembelian' => 2008,
+            'nomor_polisi' => 'L 2008 AB',
+            'deskripsi' => 'Kondisi barang bagus',
+            'harga_beli' => 300000000,
+            'merk' => 'Toyota',
+            'category_id' => 1,
+        ]);
+
+        Asset::create([
+            'nama_barang' => 'Innova',
+            'status' => 'damaged',
+            'tahun_pembelian' => 2008,
+            'nomor_polisi' => 'L 2008 AB',
+            'deskripsi' => 'Kondisi barang bagus',
+            'harga_beli' => 300000000,
+            'merk' => 'Toyota',
+            'category_id' => 1,
         ]);
     }
 }

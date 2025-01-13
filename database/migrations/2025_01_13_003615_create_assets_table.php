@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
-            $table->string('Nama Barang');
-            $table->string('Penanggung Jawab');
-            $table->integer('Tahun Pembelian');
-            $table->string('Nomor Polisi');
-            $table->text('Deskripsi');
+            $table->string('nama_barang');
+            $table->enum('status', ['available', 'damaged', 'missing'])->default('available');
+            $table->integer('tahun_pembelian');
+            $table->string('nomor_polisi')->nullable()->default(null);
+            $table->text('deskripsi')->nullable()->default(null);
+            $table->decimal('harga_beli',15, 2);
+            $table->string('merk');
             $table->unsignedBigInteger(('category_id'));
             $table->timestamps();
 
