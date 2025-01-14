@@ -48,9 +48,17 @@ class AssetsController extends Controller
         ]);
 
         // Simpan data ke database
-        Asset::create($validated);
+        // Asset::create($validated);
 
         // Redirect dengan pesan sukses
+        // return redirect('/Assets')->with('success', 'Asset berhasil ditambahkan.');
+        try {
+            Asset::create($request->all());
+            Alert::success('Berhasil!', 'Data berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            Alert::error('Gagal!', 'Terjadi kesalahan saat menambahkan data.');
+        }
+
         return redirect('/Assets')->with('success', 'Asset berhasil ditambahkan.');
     }
 
@@ -75,7 +83,12 @@ class AssetsController extends Controller
         $asset->update($validated);
 
         // Redirect dengan pesan sukses
-        Alert::success('Added Successfully', 'Employee Data Added Successfully.');
+        try {
+            Asset::update($request->all());
+            Alert::info('Updated Successfully', 'Employee Data Successfully Updated.');
+        } catch (\Exception $e) {
+            Alert::error('Gagal!', 'Terjadi kesalahan saat Updated data.');
+        }
         return redirect('/Assets');
     }
 
@@ -90,13 +103,21 @@ class AssetsController extends Controller
             "categories" => $categories,
             "Assets" => $Assets
         ]);
+
+
     }
 
     public function delete($id)
     {
         $Assets = Asset::where('id', $id);
         $Assets->delete();
-        Alert::success('Added Successfully', 'Employee Data Added Successfully.');
+
+        try {
+            $Assets->delete();
+            Alert::warning('Deleted Successfully', 'Employee Data Successfully Deleted.');
+        } catch (\Exception $e) {
+            Alert::error('Gagal!', 'Terjadi kesalahan saat Delete data.');
+        }
         return redirect('/Assets');
     }
     public function export()
