@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Asset;
 use App\Models\Category;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\EmployeesExport;
+
 
 class AssetsController extends Controller
 {
