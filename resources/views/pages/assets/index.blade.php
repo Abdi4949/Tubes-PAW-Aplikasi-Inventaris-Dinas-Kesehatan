@@ -1,20 +1,48 @@
 @extends('layouts.main')
 
 @section('header')
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            <h1>Aset</h1>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Beranda</a></li>
-                <li class="breadcrumb-item active">Aset</li>
-            </ol>
-        </div>
+<div class="row mb-2">
+    <div class="col-sm-6">
+        <h1>Aset</h1>
     </div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+            <li class="breadcrumb-item active">Aset</li>
+        </ol>
+    </div>
+</div>
 @endsection
 
 @section('content')
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header d-flex justify-content-end">
+                <a href="/Assets/create" class="btn btn-primary">
+                    Tambah Barang
+                </a>
+                <a href="{{ route('assets.export') }}" class="btn btn-success">
+                    Export ke Excel
+                </a>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nama Barang</th>
+                            <th>Status Barang</th>
+                            <th>Tahun Pembelian</th>
+                            <th>Nomor Polisi</th>
+                            <th>Deskripsi</th>
+                            <th>Harga Beli</th>
+                            <th>Merk</th>
+                            <th>Kategori</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($Assets as $Asset)
     <div class="row">
         <div class="col">
             <div class="card">
@@ -78,10 +106,15 @@
                                 @endif
                             </tr>
                         @endforeach
+
+                    </tbody>
+                </table>
+
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
