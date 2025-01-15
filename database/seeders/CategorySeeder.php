@@ -14,8 +14,34 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::create([
-            "id"=> 1,
+
             "name" => "Roda 4",
-        ]);
+
+        ]
+    );
+        Category::create([
+
+            "name" => "Roda 2",
+
+        ]
+        );
+        Category::create([
+
+            "name" => "Elektronik",
+
+        ]
+        );
+        Category::create([
+
+            "name" => "Alat Medis",
+
+        ]
+        );
+        Category::create([
+
+            "name" => "",
+
+        ]
+        );
     }
 }

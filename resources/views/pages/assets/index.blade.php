@@ -19,9 +19,11 @@
         <div class="col">
             <div class="card">
                 <div class="card-header d-flex justify-content-end">
+                    @if ($User->role == "admin")
                     <a href="/Assets/create" class="btn btn-primary">
                         Tambah Barang
                     </a>
+                    @endif
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
@@ -42,7 +44,7 @@
                             @foreach ($Assets as $Asset)
                             <tr>
                                 <td>{{ $Asset->id }}</td>
-                                <td>{{ $Asset->{'nama_barang'} }}</td> 
+                                <td>{{ $Asset->{'nama_barang'} }}</td>
                                 <td>
                                     @if($Asset->status === 'available')
                                         <span style="color: green; font-weight: bold;">Tersedia</span>
@@ -54,10 +56,11 @@
                                 </td>
                                 <td>{{ $Asset->{'tahun_pembelian'} }}</td>
                                 <td>{{ $Asset->{'nomor_polisi'} }}</td>
-                                <td>{{ $Asset->{'deskripsi'} }}</td> 
+                                <td>{{ $Asset->{'deskripsi'} }}</td>
                                 <td>{{ number_format($Asset->harga_beli, 0, ',', '.') }}</td>
                                 <td>{{ $Asset->{'merk'} }}</td>
                                 <td>{{ $Asset->category ? $Asset->category->name : 'Tidak Ada Kategori' }}</td>
+                                @if ($User->role == "admin")
                                 <td>
                                     <div class="d-flex">
                                         <a href="/Assets/edit/{{ $Asset->id }}" class="btn btn-sm btn-warning mr-2">
@@ -72,8 +75,9 @@
                                         </form>
                                     </div>
                                 </td>
+                                @endif
                             </tr>
-                        @endforeach                        
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

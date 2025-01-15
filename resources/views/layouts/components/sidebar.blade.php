@@ -1,5 +1,7 @@
 @php
-    $menus = [
+
+$user = Auth::user();
+$menus = [
         (object) [
             "title" => "Dashboard",
             "path" => "/",
@@ -10,13 +12,19 @@
             "path" => "Assets",
             "icon" => "nav-icon fas fa-th",
         ],
-        (object) [
-            "title" => "User",
-            "path" => "/",
-            "icon" => "nav-icon fas fa-th",
-        ]
-    ]
+        ];
+        if ($user && $user->role == 'admin') {
+            $menus[] = (object) [
+                "title" => "User Management",
+                "path" => "/User",
+                "icon" => "nav-icon fas fa-th",
+
+        ];
+    }
+
 @endphp
+
+
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -60,7 +68,7 @@
                with font-awesome or any other icon font library -->
                 @foreach ($menus as $menu)
                     <li class="nav-item">
-                        <a href=" {{ $menu->path[0] !== '/' ? '/' . $menu->path : $menu->path }}" class="nav-link {{ request()->path() === $menu->path ? 'active' : '' }}">
+                        <a href=" {{ $menu->path[0] !== '/' ? '/' . $menu->path : $menu->path }}" class="nav-link {{ request()->path() == $menu->path ? 'active' : '' }}">
                             <i class="nav-icon {{ $menu->icon }}"></i>
                             <p>
                                 {{ $menu->title }}

@@ -8,16 +8,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Asset;
 use App\Models\Category;
-
+use Illuminate\Support\Facades\Auth;
 class AssetsController extends Controller
 {
     public function index() {
-        $Assets = Asset::with('category')->get();
 
-        return view('pages.Assets.index', [
-            "Assets" => $Assets,
-        ]);
-    }
+  $user = Auth::user();
+  // Access the user's role
+
+  $Assets = Asset::with('category')->get();
+
+  return view('pages.Assets.index', [
+      "Assets" => $Assets,
+     "User"=>$user
+    ]);
+}
 
     public function create() {
         $categories = Category::all();
@@ -26,7 +31,7 @@ class AssetsController extends Controller
             "categories" => $categories,
         ]);
     }
-    
+
     public function store(Request $request) {
         // Validasi input pengguna
         $validated = $request->validate([
@@ -39,10 +44,10 @@ class AssetsController extends Controller
             'merk' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
         ]);
-    
+
         // Simpan data ke database
         Asset::create($validated);
-    
+
         // Redirect dengan pesan sukses
         return redirect('/Assets')->with('success', 'Asset berhasil ditambahkan.');
     }
@@ -70,7 +75,7 @@ public function update(Request $request, $id) {
     return redirect('/Assets')->with('success', 'Asset berhasil diperbarui.');
 }
 
-    
+
 
     public function edit($id) {
         $categories = Category::all();
@@ -81,7 +86,7 @@ public function update(Request $request, $id) {
             "Assets" => $Assets
         ]);
     }
-    
+
     public function delete($id)
     {
         $Assets = Asset::where('id', $id);
