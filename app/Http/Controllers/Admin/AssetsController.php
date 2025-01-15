@@ -18,11 +18,21 @@ class AssetsController extends Controller
     public function index()
     {
         $Assets = Asset::with('category')->get();
+use Illuminate\Support\Facades\Auth;
+class AssetsController extends Controller
+{
+    public function index() {
 
-        return view('pages.Assets.index', [
-            "Assets" => $Assets,
-        ]);
-    }
+  $user = Auth::user();
+  // Access the user's role
+
+  $Assets = Asset::with('category')->get();
+
+  return view('pages.Assets.index', [
+      "Assets" => $Assets,
+     "User"=>$user
+    ]);
+}
 
     public function create()
     {
@@ -33,8 +43,7 @@ class AssetsController extends Controller
         ]);
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         // Validasi input pengguna
         $validated = $request->validate([
             'nama_barang' => 'required|string|max:255',
@@ -48,8 +57,7 @@ class AssetsController extends Controller
         ]);
 
         // Simpan data ke database
-        // Asset::create($validated);
-
+        Asset::create($validated);
         // Redirect dengan pesan sukses
         // return redirect('/Assets')->with('success', 'Asset berhasil ditambahkan.');
         try {

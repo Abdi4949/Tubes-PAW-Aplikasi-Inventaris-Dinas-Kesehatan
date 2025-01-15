@@ -43,6 +43,33 @@
                     </thead>
                     <tbody>
                         @foreach ($Assets as $Asset)
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header d-flex justify-content-end">
+                    @if ($User->role == "admin")
+                    <a href="/Assets/create" class="btn btn-primary">
+                        Tambah Barang
+                    </a>
+                    @endif
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama Barang</th>
+                                <th>Status Barang</th>
+                                <th>Tahun Pembelian</th>
+                                <th>Nomor Polisi</th>
+                                <th>Deskripsi</th>
+                                <th>Harga Beli</th>
+                                <th>Merk</th>
+                                <th>Kategori</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($Assets as $Asset)
                             <tr>
                                 <td>{{ $Asset->id }}</td>
                                 <td>{{ $Asset->{'nama_barang'} }}</td>
@@ -61,6 +88,7 @@
                                 <td>{{ number_format($Asset->harga_beli, 0, ',', '.') }}</td>
                                 <td>{{ $Asset->{'merk'} }}</td>
                                 <td>{{ $Asset->category ? $Asset->category->name : 'Tidak Ada Kategori' }}</td>
+                                @if ($User->role == "admin")
                                 <td>
                                     <div class="d-flex">
                                         <a href="/Assets/edit/{{ $Asset->id }}" class="btn btn-sm btn-warning mr-2">
@@ -75,10 +103,16 @@
                                         </form>
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
+
                     </tbody>
                 </table>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
