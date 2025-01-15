@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Models\Asset;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
     public function index() {
-        return view('pages.dashboard.admin');
+        $totalUser = User::count();
+        $totalAsset = Asset::count();
+        return view('pages.dashboard.admin',[
+
+            "totalAsset" => $totalAsset,
+            "totalUser" => $totalUser
+
+          ]);
     }
 }
