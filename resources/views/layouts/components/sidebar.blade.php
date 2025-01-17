@@ -43,7 +43,7 @@ $menus = [
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Kelompok X</a>
+                <a href="#" class="d-block">Kelompok III</a>
             </div>
         </div>
 

@@ -79,16 +79,16 @@ class AdminUserController  extends Controller
         $user->role = $request->role;  // Update role if necessary
         $user->save();
 
-        return redirect()->route('pages.user.index')->with('success', 'User updated successfully');
+        return redirect('/User')->with('success', 'User updated successfully');
     }
 
     // Remove the specified user from storage
-    public function destroy($id)
+    public function delete($id)
     {
         // Find and delete the user
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('pages.user.index')->with('success', 'User deleted successfully');
+        return redirect('/User')->with('success', 'User deleted successfully');
     }
 }

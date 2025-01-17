@@ -10,19 +10,13 @@ use App\Models\Asset;
 use App\Models\Category;
 use App\Exports\AssetsExport;
 use RealRashid\SweetAlert\Facades\Alert;
-
-
-
-class AssetsController extends Controller
-{
-    public function index()
-    {
-        $Assets = Asset::with('category')->get();
 use Illuminate\Support\Facades\Auth;
-class AssetsController extends Controller
-{
-    public function index() {
 
+        class AssetsController extends Controller
+        {
+            public function index() {
+
+                $Assets = Asset::with('category')->get();
   $user = Auth::user();
   // Access the user's role
 
@@ -111,8 +105,6 @@ class AssetsController extends Controller
             "categories" => $categories,
             "Assets" => $Assets
         ]);
-
-
     }
 
     public function delete($id)
@@ -121,7 +113,6 @@ class AssetsController extends Controller
         $Assets->delete();
 
         try {
-            $Assets->delete();
             Alert::warning('Deleted Successfully', 'Employee Data Successfully Deleted.');
         } catch (\Exception $e) {
             Alert::error('Gagal!', 'Terjadi kesalahan saat Delete data.');
